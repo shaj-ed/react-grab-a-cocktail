@@ -40,6 +40,8 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchCocktail();
+    console.log("fetch");
+    console.log(typeof fetchCocktail);
   }, [searchTerm, fetchCocktail]);
 
   return (

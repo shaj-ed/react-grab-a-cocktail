@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../Components/Loading";
 
@@ -9,7 +9,7 @@ const SingleCocktailPage = () => {
   const [cocktail, setCocktail] = useState({});
   const { id } = useParams();
 
-  const fetchCocktail = async () => {
+  const fetchSingleCocktail = useCallback(async () => {
     try {
       const response = await fetch(`${url}${id}`);
       const data = await response.json();
@@ -53,10 +53,11 @@ const SingleCocktailPage = () => {
       setLoading(false);
       console.log(cocktail);
     }
-  };
+  }, [cocktail, id]);
 
   useEffect(() => {
-    fetchCocktail();
+    fetchSingleCocktail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
